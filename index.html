@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Jubilat - Dom Handlowy, sklepy i bary mleczne w Krakowie</title>
+<meta name="description" content="Handlowa Spółdzielnia JUBILAT: Dom Handlowy przy moście Dębnickim, sklepy spożywczo-przemysłowe i bary mleczne Żaczek i Flisak. Godziny otwarcia na żywo, gazetka, produkty unikatowe.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="img/znak.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Wizualizacja koncepcyjna nowej strony glownej. Dane, zdjecia, ceny i godziny pochodza z jubilat.com.pl (stan na 23.10.2026). -->
+
+<header class="top" id="top">
+  <div class="top-in">
+    <a class="logo" href="#top" aria-label="Jubilat - strona główna"><img src="img/logo.webp" width="306" height="74" alt="Jubilat Handlowa Spółdzielnia"></a>
+    <nav class="menu" aria-label="Menu główne">
+      <a href="#placowki">Sklepy i godziny</a>
+      <a href="#dom-handlowy">Dom Handlowy</a>
+      <a href="#bary">Bary mleczne</a>
+      <a href="#gazetka">Gazetka</a>
+      <a href="#aplikacja">Aplikacja</a>
+      <a href="#wynajem">Wynajem</a>
+      <a href="#historia">Historia</a>
+    </nav>
+    <a class="top-tel" href="tel:+48124228040" aria-label="Zadzwoń: 12 422 80 40">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
+      <span>12 422 80 40</span>
+    </a>
+    <button class="burger" aria-label="Otwórz menu" aria-expanded="false" aria-controls="panel"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="panel" id="panel" hidden>
+  <nav aria-label="Menu mobilne">
+    <a href="#placowki">Sklepy i godziny otwarcia</a>
+    <a href="#dom-handlowy">Dom Handlowy Jubilat</a>
+    <a href="#produkty">Produkty unikatowe</a>
+    <a href="#bary">Bary mleczne Żaczek i Flisak</a>
+    <a href="#gazetka">Gazetka i okazje tygodnia</a>
+    <a href="#aplikacja">Aplikacja i rabaty</a>
+    <a href="#wynajem">Sala i lokale na wynajem</a>
+    <a href="#historia">Historia</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <p class="panel-kontakt">Al. Krasińskiego 1, 31-111 Kraków<br><a href="tel:+48124228040">12 422 80 40</a> · <a href="mailto:info@jubilat.com.pl">info@jubilat.com.pl</a></p>
+</div>
+
+<main>
+<section class="hero">
+  <figure class="hero-foto">
+    <img src="img/dh.jpg" srcset="img/dh-m.jpg 820w, img/dh.jpg 1334w" sizes="(max-width: 760px) 100vw, 58vw" width="1334" height="1006" alt="Dom Handlowy Jubilat przy al. Krasińskiego, modernistyczny budynek z przeszkloną fasadą i neonem JUBILAT na dachu" fetchpriority="high">
+    <figcaption>Dom Handlowy Jubilat, otwarty 20 lipca 1969 r.</figcaption>
+  </figure>
+  <div class="hero-in">
+    <p class="hero-adres">Al. Krasińskiego 1, przy moście Dębnickim</p>
+    <h1>Dom Handlowy Jubilat, sklepy i&nbsp;bary mleczne w&nbsp;Krakowie</h1>
+    <p class="lead">Spółdzielnia z rodowodem „Społem” od 1908 roku. <span class="lead-dod">Jubilat działa nad zakolem Wisły od 1969 roku, a nasze sklepy i bary są na wielu krakowskich osiedlach.</span></p>
+    <div class="hero-cta">
+      <a class="btn btn-or" href="#placowki">Sprawdź, co jest otwarte</a>
+    </div>
+    <p class="teraz" id="teraz" aria-live="polite"><span class="kropka"></span><span id="terazTxt">Sprawdzamy godziny otwarcia…</span></p>
+  </div>
+</section>
+
+<section class="sek placowki" id="placowki">
+  <div class="wrap">
+    <div class="sek-glowa">
+      <h2>Gdzie i do której otwarte</h2>
+      <p>Status liczymy na bieżąco, razem z niedzielami handlowymi i świętami. Dotknij numeru, żeby zadzwonić, albo „Prowadź”, żeby wyznaczyć trasę.</p>
+    </div>
+    <div class="filtry" role="toolbar" aria-label="Filtry placówek">
+      <div class="seg" role="group" aria-label="Rodzaj placówki">
+        <button class="on" data-f="all" aria-pressed="true">Wszystkie <b id="nAll"></b></button>
+        <button data-f="sklep" aria-pressed="false">Sklepy <b id="nSklep"></b></button>
+        <button data-f="bar" aria-pressed="false">Bary <b id="nBar"></b></button>
+      </div>
+      <label class="przel"><input type="checkbox" id="tylkoOtw"> <span>Tylko otwarte teraz</span></label>
+      <button class="btn btn-linia btn-geo" id="geoBtn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+        Najbliżej mnie
+      </button>
+    </div>
+    <p class="geo-info" id="geoInfo" hidden></p>
+    <div class="pl-uklad">
+      <div class="mapa-box"><div id="mapa" aria-label="Mapa placówek Jubilat"></div></div>
+      <ol class="lista" id="lista"></ol>
+    </div>
+    <p class="pieczywo"><b>Nie marnuj pieczywa:</b> codziennie od 19:00 do zamknięcia pieczywo 10% taniej we wszystkich sklepach sieci Jubilat.</p>
+  </div>
+</section>
+
+<section class="sek dh" id="dom-handlowy">
+  <div class="wrap">
+    <div class="sek-glowa">
+      <h2>Dom Handlowy Jubilat</h2>
+      <p>Około 6 800 m² nad zakolem Wisły, niedaleko Wawelu. Pełny wybór artykułów spożywczych i przemysłowych znanych producentów, a obok nasze stoiska handlowe i usługowe firm.</p>
+    </div>
+    <div class="dh-uklad">
+      <ol class="pietra">
+        <li>
+          <span class="p-poz">II-III</span>
+          <div class="p-tresc">
+            <h3>Salon Eleganza</h3>
+            <p>Odzież damska, męska i dziecięca, obuwie i galanteria, a także tekstylia, walizki, artykuły szkolno-biurowe i zabawki. 95% asortymentu od polskich producentów.</p>
+            <p class="marki">Tamaris, Gabol, Lee Cooper, Rino&amp;Pelle, Dom Mody Skórska, Feria, Red Button, Micha, In Front, Anekke, iDO, Mayoral, Nena Bebe</p>
+          </div>
+          <p class="p-godz">pn-pt 9:00-20:00<br>sob 9:00-19:00<br>niedz. handlowa 10:00-18:00</p>
+        </li>
+        <li>
+          <span class="p-poz">I</span>
+          <div class="p-tresc">
+            <h3>Stoisko HOME ze strefą Beauty</h3>
+            <p>Drobne AGD, żarówki, baterie i przedłużacze, rzeczy do kuchni i łazienki. W strefie Beauty kosmetyki do makijażu i pielęgnacji, także od lokalnych producentów, np. krakowskiej manufaktury La-Le.</p>
+          </div>
+          <p class="p-godz">pn-pt 9:00-20:00<br>sob 9:00-19:00<br>niedz. handlowa 10:00-18:00</p>
+        </li>
+        <li>
+          <span class="p-poz">P</span>
+          <div class="p-tresc">
+            <h3>Stoisko spożywcze</h3>
+            <p>Pieczywo i ciasta, nabiał z małych mleczarni, produkty unikatowe. Opłacisz tu rachunki, wypłacisz gotówkę (cashback), zapłacisz kartą lub bonami Pluxee.</p>
+          </div>
+          <p class="p-godz">pn-pt 6:00-22:00<br>sob 7:00-22:00<br>niedz. handlowa 8:00-20:00</p>
+        </li>
+      </ol>
+      <figure class="dh-foto">
+        <img src="img/eleganza.jpg" width="1200" height="800" loading="lazy" alt="Sesja jesiennej kolekcji Salonu Eleganza">
+        <figcaption>Salon Eleganza, II i III piętro. Tel. Domu Handlowego: <a href="tel:+48126193300">12 619 33 00</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sek produkty" id="produkty">
+  <div class="wrap">
+    <div class="sek-glowa sek-glowa-row">
+      <div>
+        <h2>Produkty unikatowe</h2>
+        <p>Nabiał z małych mleczarni, ręcznie robione łazanki i pierogi, miody, syropy i herbaty. Ceny z jubilat.com.pl, stan na 23.10.2026.</p>
+      </div>
+      <div class="strzalki" aria-hidden="true">
+        <button type="button" data-kier="-1" aria-label="Przewiń w lewo">‹</button>
+        <button type="button" data-kier="1" aria-label="Przewiń w prawo">›</button>
+      </div>
+    </div>
+    <ul class="polka" id="polka"></ul>
+  </div>
+</section>
+
+<section class="sek bary" id="bary">
+  <div class="wrap">
+    <div class="sek-glowa">
+      <h2>Bary mleczne Żaczek i Flisak</h2>
+      <p>Domowe obiady w dni powszednie. Zestaw zupa i drugie danie w menu tygodnia <span id="menuZakres">19-23.10.2026</span>. Zamówisz też z dowozem przez Wolt, Bolt Food i Glovo.</p>
+    </div>
+    <div class="bary-uklad" id="baryUklad"></div>
+  </div>
+</section>
+
+<section class="sek gazetka" id="gazetka">
+  <div class="wrap gaz-uklad">
+    <div class="gaz-okladka">
+      <a href="https://jubilat.com.pl/gazetka-jubilat-1_www-4/" target="_blank" rel="noopener"><img src="img/gazetka.jpg" width="744" height="1052" loading="lazy" alt="Okładka gazetki Domu Handlowego Jubilat"></a>
+      <div>
+        <h2>Gazetka</h2>
+        <p>Oferta Domu Handlowego Jubilat, ważna od 21.01 do 11.02.2026 r.</p>
+        <a class="btn btn-linia" href="https://jubilat.com.pl/gazetka-jubilat-1_www-4/" target="_blank" rel="noopener">Otwórz gazetkę (PDF, 20 stron)</a>
+      </div>
+    </div>
+    <div class="okazje">
+      <h3>Okazje z aplikacji, 20-26.10.2026</h3>
+      <p class="okazje-opis">Ceny dla klientów z aplikacją Jubilat albo kartą lojalnościową Społem lub Jubilat. Obok najniższa cena z ostatnich 30 dni.</p>
+      <ul class="okazje-lista" id="okazje"></ul>
+      <p class="przypis">Najniższe ceny z 30 dni podano ze stoiska spożywczego DH Jubilat, Al. Krasińskiego 1.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sek aplikacja" id="aplikacja">
+  <div class="wrap app-uklad">
+    <div class="app-tekst">
+      <h2>Aplikacja Jubilat</h2>
+      <ul class="app-lista">
+        <li>Za każde wydane 10 zł dostajesz 1 punkt, a na start 100 punktów.</li>
+        <li>Punkty wymieniasz na e-bony o wartości 5, 20 i 40 zł.</li>
+        <li>Punkty zbierasz w sklepach Jubilat, w Salonie Eleganza, na stoisku HOME oraz w barach Flisak i Żaczek.</li>
+        <li>Masz dostęp do okazji i akcji specjalnych w całej sieci.</li>
+      </ul>
+      <div class="sklepy-app">
+        <a class="app-btn" href="https://apps.apple.com/app/6756414653" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.5 2-3.6-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.8-3.5.8-.7 0-1.8-.8-3-.8A4.5 4.5 0 0 0 4.7 9.5c-1.6 2.8-.4 6.9 1.1 9.2.8 1.1 1.7 2.3 2.9 2.3 1.1-.1 1.6-.8 3-.8s1.8.8 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.2-2.6 0 0-2.3-.9-2.3-3.5zM14.1 5.6c.6-.8 1.1-1.8 1-2.9-.9 0-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.7-1.3z"/></svg>
+          <span><small>Pobierz z</small>App Store</span>
+        </a>
+        <a class="app-btn" href="https://play.google.com/store/apps/details?id=pl.loyaltyclub.spolemjubilat" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.8 13.6 12 4 21.2c-.3-.2-.5-.6-.5-1V3.8c0-.4.2-.8.5-1zm10.7 10.3 2.3 2.2-10.6 6 8.3-8.2zm3.6-3.4 2.7 1.5c.7.4.7 1.4 0 1.8l-2.7 1.5-2.6-2.5 2.6-2.3zM6.4 2.7l10.6 6-2.3 2.2-8.3-8.2z"/></svg>
+          <span><small>Pobierz z</small>Google Play</span>
+        </a>
+      </div>
+      <p class="app-pomoc">Pomoc w sprawie aplikacji: <a href="tel:+48780191172">780 191 172</a>, pn-pt 7:00-15:00.</p>
+    </div>
+    <div class="rabaty">
+      <h3>3% rabatu dla krakowskich rodzin</h3>
+      <p>Posiadacze kart Krakowska Duża Rodzina, Rodzina 3+ oraz Krakowskie Rodziny z Niepełnosprawnym Dzieckiem dostają 3% rabatu we wszystkich naszych sklepach. Wystarczy pokazać kartę przy kasie.</p>
+      <p class="male">Rabat od zakupów za min. 5 zł. Nie obejmuje alkoholu, wyrobów tytoniowych, prasy, doładowań telefonicznych oraz toreb.</p>
+      <h3>Bony towarowe dla firm</h3>
+      <p>Bony o nominałach 10, 20 i 50 zł do wykorzystania w DH Jubilat i sklepach sieci. Zamówienia: <a href="mailto:marketing@jubilat.com.pl">marketing@jubilat.com.pl</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sek wynajem" id="wynajem">
+  <div class="wrap">
+    <div class="sek-glowa">
+      <h2>Sala i lokale na wynajem</h2>
+      <p>Wynajmujemy salę konferencyjną w Domu Handlowym, pomieszczenia biurowe, lokal użytkowy i magazyny. Zaznacz, czego szukasz, a przygotujemy gotową wiadomość do administracji.</p>
+    </div>
+    <div class="wyn-uklad">
+      <div class="wyn-oferta">
+        <figure class="wyn-foto"><img src="img/sala-2.jpg" width="1200" height="675" loading="lazy" alt="Sala konferencyjna w Domu Handlowym Jubilat"></figure>
+        <dl class="wyn-dl">
+          <div><dt>Sala konferencyjna</dt><dd>do 80 miejsc, klimatyzowana, tablice, rzutnik, nagłośnienie, internet. Tel. <a href="tel:+48126193398">12 619 33 98</a></dd></div>
+          <div><dt>Biura</dt><dd>15 m², 15,4 m², 21,8 m² i 23,5 m²</dd></div>
+          <div><dt>Lokal użytkowy</dt><dd>ul. Machaya 1, 122 m²</dd></div>
+          <div><dt>Magazyny</dt><dd>powierzchnię dobierzemy do potrzeb. Tel. <a href="tel:+48126193419">12 619 34 19</a></dd></div>
+        </dl>
+      </div>
+      <form class="wyn-form" id="wynForm" novalidate>
+        <fieldset>
+          <legend>Czego szukasz?</legend>
+          <div class="chipy" data-p="typ">
+            <button type="button" data-v="sala" class="on">Sala konferencyjna</button>
+            <button type="button" data-v="biuro">Biuro</button>
+            <button type="button" data-v="lokal">Lokal użytkowy</button>
+            <button type="button" data-v="magazyn">Magazyn</button>
+          </div>
+        </fieldset>
+        <div class="pola" data-dla="sala">
+          <label>Data wydarzenia<input type="date" id="fData"></label>
+          <label>Liczba osób<input type="number" id="fOsoby" min="1" max="80" inputmode="numeric" placeholder="np. 40"></label>
+        </div>
+        <div class="pola" data-dla="biuro" hidden>
+          <fieldset class="pelne"><legend>Powierzchnia biura</legend>
+            <div class="chipy" data-p="biuro">
+              <button type="button" data-v="15 m²">15 m²</button>
+              <button type="button" data-v="15,4 m²">15,4 m²</button>
+              <button type="button" data-v="21,8 m²">21,8 m²</button>
+              <button type="button" data-v="23,5 m²">23,5 m²</button>
+            </div>
+          </fieldset>
+        </div>
+        <div class="pola" data-dla="magazyn" hidden>
+          <label>Potrzebna powierzchnia (m²)<input type="number" id="fM2" min="1" inputmode="numeric" placeholder="np. 50"></label>
+        </div>
+        <div class="pola" data-dla="biuro lokal magazyn" hidden>
+          <label>Od kiedy<select id="fOd"><option value="">Od zaraz</option><option>od grudnia 2026</option><option>od stycznia 2027</option><option>od lutego 2027</option><option>od marca 2027</option><option>później, termin do ustalenia</option></select></label>
+        </div>
+        <div class="pola">
+          <label>Imię i nazwisko<input type="text" id="fImie" autocomplete="name" placeholder="Jan Kowalski"></label>
+          <label>Telefon<input type="tel" id="fTel" autocomplete="tel" placeholder="np. 600 000 000"></label>
+        </div>
+        <label class="pelne">Kilka słów o potrzebach<textarea id="fOpis" rows="3" placeholder="np. szkolenie całodniowe, potrzebny rzutnik"></textarea></label>
+        <div class="podglad">
+          <p class="podglad-tyt">Twoja wiadomość do <b>administracja@jubilat.com.pl</b></p>
+          <pre id="podglad"></pre>
+        </div>
+        <div class="form-akcje">
+          <a class="btn btn-or" id="wynMail" href="#">Wyślij e-mail</a>
+          <button class="btn btn-linia" type="button" id="wynKopiuj">Kopiuj treść</button>
+          <a class="wyn-tel" id="wynTel" href="tel:+48126193398">lub zadzwoń: 12 619 33 98</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sek historia" id="historia">
+  <div class="wrap hist-uklad">
+    <div class="hist-intro">
+      <h2>Historia</h2>
+      <p>Jubilat to modernistyczna plomba u zbiegu ul. Zwierzynieckiej i al. Krasińskiego. Dwie przeszklone kondygnacje parteru, wysunięte piętra handlowe w ścianie kurtynowej, nad nimi dekoracyjny raster elewacji, a na dachu neon z nazwą.</p>
+      <figure class="znak">
+        <img src="img/znak.png" width="180" height="180" alt="Znak firmowy Jubilat: skrzydełko z czapki Merkurego">
+        <figcaption>Nasz znak to stylizowane skrzydełko z czapki Merkurego, patrona kupców.</figcaption>
+      </figure>
+    </div>
+    <ol class="os">
+      <li><span class="rok">1908</span><p>Na krakowskim rynku działa spółdzielczość spożywców „Społem”, z której wywodzi się Jubilat.</p></li>
+      <li><span class="rok">1958</span><p>Na 50-lecie spółdzielni rodzi się pomysł nowoczesnego centrum handlowego dla Krakowa.</p></li>
+      <li><span class="rok">1959</span><p>Pierwsza koncepcja architektoniczna, z kawiarnią na dachu i widokiem na Wisłę. Wstępny projekt przygotował Henryk Jerzy Marconi.</p></li>
+      <li><span class="rok">1969</span><p>20 lipca otwarcie Domu Handlowego „Jubilat” według projektu zespołu pod kierunkiem Jadwigi Sanickiej. Budowa na podmokłym gruncie przy Wiśle trwała blisko dekadę.</p></li>
+      <li><span class="rok">1991</span><p>Spółdzielnia przyjmuje nazwę Handlowa Spółdzielnia Jubilat.</p></li>
+      <li><span class="rok">2014</span><p>Modernizacja stolarki. Szyby o delikatnie niebieskim odcieniu zastępują pierwotne, brązowe.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sek kontakt" id="kontakt">
+  <div class="wrap kont-uklad">
+    <div>
+      <h2>Kontakt</h2>
+      <p class="kont-firma">Handlowa Spółdzielnia JUBILAT<br>Al. Zygmunta Krasińskiego 1, 31-111 Kraków</p>
+    </div>
+    <dl class="kont-dl">
+      <div><dt>Telefon</dt><dd><a href="tel:+48124228040">12 422 80 40</a></dd></div>
+      <div><dt>E-mail</dt><dd><a href="mailto:info@jubilat.com.pl">info@jubilat.com.pl</a></dd></div>
+      <div><dt>Faks</dt><dd>12 422 25 65</dd></div>
+      <div><dt>Praca</dt><dd><a href="https://system.erecruiter.pl/FormTemplates/RecruitmentForm.aspx?WebID=a64696e07d6d4a519818511da1ca7836" target="_blank" rel="noopener">Aktualne oferty pracy</a></dd></div>
+    </dl>
+    <ul class="social">
+      <li><a href="https://www.facebook.com/JubilatKrakow" target="_blank" rel="noopener">Facebook</a></li>
+      <li><a href="https://www.instagram.com/jubilat_domhandlowy/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@jubilatkrakow" target="_blank" rel="noopener">TikTok</a></li>
+      <li><a href="https://www.youtube.com/@Sie%C4%87HandlowaJUBILAT" target="_blank" rel="noopener">YouTube</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="stopka">
+  <div class="wrap">
+    <p>© Handlowa Spółdzielnia JUBILAT w Krakowie</p>
+    <p class="stopka-uw">Wizualizacja koncepcyjna nowej strony. Zdjęcia, ceny, menu i godziny otwarcia pochodzą z jubilat.com.pl (stan na 23.10.2026).</p>
+  </div>
+</footer>
+
+<div class="mob" id="mob">
+  <a class="mob-tel" href="tel:+48124228040">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
+    Zadzwoń
+  </a>
+  <a class="mob-cta" href="#placowki">Godziny otwarcia</a>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="app.js"></script>
+</body>
+</html>
