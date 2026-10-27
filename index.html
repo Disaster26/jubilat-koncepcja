@@ -10,7 +10,7 @@
 <link rel="icon" href="img/znak.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Cormorant+Garamond:wght@500;600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -21,6 +21,7 @@
   <div class="top-in">
     <a class="logo" href="#top" aria-label="Jubilat - strona główna"><img src="img/logo.webp" width="306" height="74" alt="Jubilat Handlowa Spółdzielnia"></a>
     <nav class="menu" aria-label="Menu główne">
+      <a class="menu-el" href="eleganza.html">Eleganza</a>
       <a href="#placowki">Sklepy i godziny</a>
       <a href="#dom-handlowy">Dom Handlowy</a>
       <a href="#bary">Bary mleczne</a>
@@ -29,6 +30,7 @@
       <a href="#wynajem">Wynajem</a>
       <a href="#historia">Historia</a>
     </nav>
+    <a class="top-el" href="eleganza.html">Eleganza</a>
     <a class="top-tel" href="tel:+48124228040" aria-label="Zadzwoń: 12 422 80 40">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
       <span>12 422 80 40</span>
@@ -40,6 +42,7 @@
 <div class="panel" id="panel" hidden>
   <nav aria-label="Menu mobilne">
     <a href="#placowki">Sklepy i godziny otwarcia</a>
+    <a class="panel-el" href="eleganza.html">Salon Eleganza</a>
     <a href="#dom-handlowy">Dom Handlowy Jubilat</a>
     <a href="#produkty">Produkty unikatowe</a>
     <a href="#bary">Bary mleczne Żaczek i Flisak</a>
@@ -60,12 +63,34 @@
   </figure>
   <div class="hero-in">
     <p class="hero-adres">Al. Krasińskiego 1, przy moście Dębnickim</p>
-    <h1>Dom Handlowy Jubilat, sklepy i&nbsp;bary mleczne w&nbsp;Krakowie</h1>
-    <p class="lead">Spółdzielnia z rodowodem „Społem” od 1908 roku. <span class="lead-dod">Jubilat działa nad zakolem Wisły od 1969 roku, a nasze sklepy i bary są na wielu krakowskich osiedlach.</span></p>
+    <h1>Jubilat. Zakupy, moda i&nbsp;domowe obiady w&nbsp;Krakowie</h1>
+    <ul class="hero-co">
+      <li><a href="#dom-handlowy"><b>Dom Handlowy</b><span>duży sklep spożywczy z&nbsp;delikatesami, stoisko HOME</span></a></li>
+      <li class="hero-co-el"><a href="eleganza.html"><b>Salon Eleganza</b><span>ekskluzywna moda, II-III piętro</span></a></li>
+      <li><a href="#placowki"><b>8 sklepów</b><span>na krakowskich osiedlach</span></a></li>
+      <li><a href="#bary"><b>Bary mleczne</b><span>Żaczek i&nbsp;Flisak</span></a></li>
+    </ul>
+    <p class="lead">Spółdzielnia z rodowodem „Społem” od 1908 roku, nad Wisłą od 1969.</p>
     <div class="hero-cta">
       <a class="btn btn-or" href="#placowki">Sprawdź, co jest otwarte</a>
     </div>
     <p class="teraz" id="teraz" aria-live="polite"><span class="kropka"></span><span id="terazTxt">Sprawdzamy godziny otwarcia…</span></p>
+  </div>
+</section>
+
+<section class="el-baner" aria-labelledby="elBanerTyt">
+  <div class="el-baner-in">
+    <div class="el-baner-foto">
+      <img src="img/eleganza/baner.jpg" width="533" height="800" loading="lazy" alt="Para w eleganckich stylizacjach z kolekcji jesień-zima w Salonie Eleganza">
+      <img class="el-baner-foto2" src="img/eleganza/kolekcja-1.jpg" width="533" height="800" loading="lazy" alt="Płaszcz w kolorze camel i sukienka w kratę z kolekcji Salonu Eleganza">
+    </div>
+    <div class="el-baner-tekst">
+      <h2 id="elBanerTyt">Salon Eleganza</h2>
+      <p class="el-haslo">Prawdziwy luksus szyty w Polsce</p>
+      <p>Odzież damska, męska i dziecięca, obuwie i galanteria. 95% kolekcji pochodzi od polskich producentów, m.in. Domu Mody Skórska, Ferii, Red Button i Michy.</p>
+      <a class="btn el-btn" href="eleganza.html">Zobacz kolekcję</a>
+      <p class="el-baner-godz">II i III piętro Domu Handlowego Jubilat. Pn-pt 9:00-20:00, sob 9:00-19:00</p>
+    </div>
   </div>
 </section>
 
@@ -105,16 +130,16 @@
     <div class="dh-uklad">
       <ol class="pietra">
         <li>
-          <span class="p-poz">II-III</span>
+          <span class="p-poz">II-III piętro</span>
           <div class="p-tresc">
-            <h3>Salon Eleganza</h3>
+            <h3><a class="p-el" href="eleganza.html">Salon Eleganza</a></h3>
             <p>Odzież damska, męska i dziecięca, obuwie i galanteria, a także tekstylia, walizki, artykuły szkolno-biurowe i zabawki. 95% asortymentu od polskich producentów.</p>
             <p class="marki">Tamaris, Gabol, Lee Cooper, Rino&amp;Pelle, Dom Mody Skórska, Feria, Red Button, Micha, In Front, Anekke, iDO, Mayoral, Nena Bebe</p>
           </div>
           <p class="p-godz">pn-pt 9:00-20:00<br>sob 9:00-19:00<br>niedz. handlowa 10:00-18:00</p>
         </li>
         <li>
-          <span class="p-poz">I</span>
+          <span class="p-poz">I piętro</span>
           <div class="p-tresc">
             <h3>Stoisko HOME ze strefą Beauty</h3>
             <p>Drobne AGD, żarówki, baterie i przedłużacze, rzeczy do kuchni i łazienki. W strefie Beauty kosmetyki do makijażu i pielęgnacji, także od lokalnych producentów, np. krakowskiej manufaktury La-Le.</p>
@@ -122,7 +147,7 @@
           <p class="p-godz">pn-pt 9:00-20:00<br>sob 9:00-19:00<br>niedz. handlowa 10:00-18:00</p>
         </li>
         <li>
-          <span class="p-poz">P</span>
+          <span class="p-poz">Parter</span>
           <div class="p-tresc">
             <h3>Stoisko spożywcze</h3>
             <p>Pieczywo i ciasta, nabiał z małych mleczarni, produkty unikatowe. Opłacisz tu rachunki, wypłacisz gotówkę (cashback), zapłacisz kartą lub bonami Pluxee.</p>
@@ -132,7 +157,7 @@
       </ol>
       <figure class="dh-foto">
         <img src="img/eleganza.jpg" width="1200" height="800" loading="lazy" alt="Sesja jesiennej kolekcji Salonu Eleganza">
-        <figcaption>Salon Eleganza, II i III piętro. Tel. Domu Handlowego: <a href="tel:+48126193300">12 619 33 00</a></figcaption>
+        <figcaption>Salon Eleganza, II i III piętro. <a href="eleganza.html">Nowa kolekcja</a>. Tel. Domu Handlowego: <a href="tel:+48126193300">12 619 33 00</a></figcaption>
       </figure>
     </div>
   </div>
