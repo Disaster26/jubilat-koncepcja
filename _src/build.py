@@ -461,7 +461,7 @@ def strona(path, *, meta_slug=None, title=None, desc=None, body="", body_cls="",
 
 def ph(Pp, trail, h1, lead="", meta_html="", foto=None, foto_alt="", foto_cap="", st_id=None):
     st = f'<p class="st" data-st="{st_id}"></p>' if st_id else ""
-    tekst = f'<div class="ph-in">{okruszki(Pp, trail)}<h1>{h1}</h1>' + (f'<p class="ph-lead">{lead}</p>' if lead else "") + st + (f'<div class="ph-meta">{meta_html}</div>' if meta_html else "") + "</div>"
+    tekst = f'<div class="ph-in">{okruszki(Pp, trail)}<h1{" class=" + chr(34) + "h1-dl" + chr(34) if len(html.unescape(h1)) > 44 else ""}>{h1}</h1>' + (f'<p class="ph-lead">{lead}</p>' if lead else "") + st + (f'<div class="ph-meta">{meta_html}</div>' if meta_html else "") + "</div>"
     if foto:
         cap = f"<figcaption>{e(foto_cap)}</figcaption>" if foto_cap else ""
         return f'<section class="ph ph-foto">{tekst}<figure>{pic(Pp, foto, foto_alt, sizes="(max-width: 760px) 100vw, 55vw", lazy=False, prio=True)}{cap}</figure></section>'
@@ -628,12 +628,21 @@ def bar_karta(Pp, p, h="h3"):
 </article>'''
 
 
+def gaz_status():
+    G = D.GAZETKA
+    if DZIS > G["do"]:
+        return "Oferta zakończona " + data_pl(G["do"], False) + ". Nowa gazetka pojawi się tu wkrótce."
+    if DZIS < G["od"]:
+        return "Gazetka zacznie obowiązywać wkrótce."
+    return "Gazetka aktualna, ważna do " + data_pl(G["do"], False) + "."
+
+
 def okazje_html(Pp, cls="okazje-lista"):
     out = ""
     for o in D.OKAZJE:
         info = przygotuj(o["img"], WIZ / f"{o['img']}.jpg", [380])
         out += (f'<li class="ok" data-od="{o["od"]}" data-do="{o["do"]}">{pic(Pp, info, o["nazwa"], sizes="(max-width: 760px) 45vw, 230px")}'
-                f'<div class="ok-in"><p class="cena">{o["cena"]} <small>{o["jedn"]}</small></p><h4>{e(o["nazwa"])}</h4>'
+                f'<div class="ok-in"><p class="cena">{o["cena"]} <small>{o["jedn"]}</small></p><h3 class="ok-h">{e(o["nazwa"])}</h3>'
                 f'<p>Najniższa cena z 30 dni: {o["min30"]}</p><p class="ok-daty">{data_kr(o["od"])[:5]}-{data_kr(o["do"])}</p></div></li>')
     return f'<ul class="{cls}" data-pusto="brakOkazji">{out}</ul><p class="brak-okazji" id="brakOkazji" hidden>Nowe okazje pojawią się tu wkrótce. Zajrzyj do <a class="link" href="{Pp.a("gazetka/")}">gazetki</a>.</p>'
 
@@ -728,7 +737,7 @@ def s_home():
 <section class="sek gazetka" id="gazetka"><div class="wrap gaz-uklad">
   <div class="gaz-okladka">
     <a href="{Pp.a("gazetka/")}">{pic(Pp, gaz, "Okładka gazetki Domu Handlowego Jubilat: Jesienne okazje", sizes="(max-width: 760px) 44vw, 300px")}</a>
-    <div><h2>Gazetka</h2><p>{e(D.GAZETKA["tytul"])}, oferta ważna od {data_kr(D.GAZETKA["od"])[:5]} do {data_kr(D.GAZETKA["do"])} r.</p><p class="st" data-gazetka data-gaz-od="{D.GAZETKA['od']}" data-gaz-do="{D.GAZETKA['do']}"></p>
+    <div><h2>Gazetka</h2><p>{e(D.GAZETKA["tytul"])}, oferta ważna od {data_kr(D.GAZETKA["od"])[:5]} do {data_kr(D.GAZETKA["do"])} r.</p><p class="st" data-gazetka data-gaz-od="{D.GAZETKA['od']}" data-gaz-do="{D.GAZETKA['do']}">{gaz_status()}</p>
     <a class="btn btn-linia" href="{Pp.a("gazetka/")}">Przeglądaj gazetkę</a></div>
   </div>
   <div class="okazje">
@@ -1010,7 +1019,7 @@ def s_gazetka():
   <div class="gz">
     <a class="gz-okl" href="{pdf}" target="_blank" rel="noopener">{pic(Pp, okl, "Okładka gazetki Jubilat: " + G["tytul"], sizes="(max-width: 760px) 280px, 420px")}</a>
     <div><h2>{e(G["tytul"])}</h2><p class="gz-daty">Oferta ważna od {data_pl(G["od"], False)} do {data_pl(G["do"])}</p>
-    <p class="st" data-gazetka data-gaz-od="{D.GAZETKA['od']}" data-gaz-do="{D.GAZETKA['do']}"></p>
+    <p class="st" data-gazetka data-gaz-od="{D.GAZETKA['od']}" data-gaz-do="{D.GAZETKA['do']}">{gaz_status()}</p>
     <p class="gz-opis">{e(G["miejsce"])}. {G["strony"]} stron. Okres ważności jest podany także na pierwszej stronie gazetki.</p>
     <div class="akcje"><a class="btn btn-ciem" href="{pdf}" target="_blank" rel="noopener">Otwórz gazetkę (PDF, {size_mb:.1f} MB)</a><a class="btn btn-linia" href="{pdf}" download>Pobierz</a></div>
     {test_uw("to ostatnia opublikowana gazetka (21.10-04.11.2026). Po jej terminie status sam zmienia się na „zakończona”. Nową gazetkę dodaje się w panelu: plik PDF + daty od-do.")}</div>
