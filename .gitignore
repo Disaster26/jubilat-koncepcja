@@ -1,1 +1,6 @@
-_src/
+_src/*
+!_src/build.py
+!_src/dane.py
+!_src/shots.py
+_src/_tmp_gaz/
+__pycache__/
