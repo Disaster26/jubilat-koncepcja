@@ -1044,3 +1044,4 @@ picture{display:block}
 .ph-foto h1{max-width:16ch}
 .ph h1.h1-dl{font-size:clamp(36px,3.5vw,54px);max-width:20ch}
 @media (max-width:760px){.ph h1.h1-dl{font-size:clamp(30px,8.4vw,38px)}}
+.gz-okl{width:100%}

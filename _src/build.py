@@ -1017,7 +1017,7 @@ def s_gazetka():
     body = ph(Pp, [("Gazetka", "gazetka/")], e(m["h1"]), "Promocje z gazetki obowiązują w Domu Handlowym Jubilat, chyba że przy produkcie zaznaczono inaczej. Gazetkę przejrzysz na stronie albo pobierzesz w PDF.") + f'''
 <section class="sek"><div class="wrap">
   <div class="gz">
-    <a class="gz-okl" href="{pdf}" target="_blank" rel="noopener">{pic(Pp, okl, "Okładka gazetki Jubilat: " + G["tytul"], sizes="(max-width: 760px) 280px, 420px")}</a>
+    <a class="gz-okl" href="{pdf}" target="_blank" rel="noopener">{pic(Pp, okl, "Okładka gazetki Jubilat: " + G["tytul"], sizes="(max-width: 760px) 280px, 420px", lazy=False)}</a>
     <div><h2>{e(G["tytul"])}</h2><p class="gz-daty">Oferta ważna od {data_pl(G["od"], False)} do {data_pl(G["do"])}</p>
     <p class="st" data-gazetka data-gaz-od="{D.GAZETKA['od']}" data-gaz-do="{D.GAZETKA['do']}">{gaz_status()}</p>
     <p class="gz-opis">{e(G["miejsce"])}. {G["strony"]} stron. Okres ważności jest podany także na pierwszej stronie gazetki.</p>
